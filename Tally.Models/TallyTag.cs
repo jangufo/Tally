@@ -1,9 +1,14 @@
-﻿namespace Tally.Models;
+﻿using SqlSugar;
 
-public class TallyTag
+namespace Tally.Models;
+
+public class TallyTag : ModelBase
 {
-    public int Id { get; set; }
+    [SugarColumn(ColumnDataType = "nvarchar(100)")]
     public string Name { get; set; } = string.Empty;
+
     public int? ParentId { get; set; }
+
+    [SugarColumn(IsIgnore = true)]
     public List<TallyTag>? Child { get; set; }
 }

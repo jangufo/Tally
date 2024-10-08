@@ -1,28 +1,21 @@
-﻿namespace Tally.Models;
+﻿using SqlSugar;
 
-public class TallyBill
+namespace Tally.Models;
+
+public class TallyBill : ModelBase
 {
-    public int Id { get; set; }
     public int UserId { get; set; }
 
     /// <summary>
-    ///     交易时间
+    ///     收款商家
     /// </summary>
-    public DateTime CreatDateTime { get; set; }
-
-    /// <summary>
-    ///     最后一次修改时间
-    /// </summary>
-    public DateTime LastModifiedDateTime { get; set; }
-
-    /// <summary>
-    ///     收款商家id
-    /// </summary>
-    public int BusinessId { get; set; }
+    [SugarColumn(ColumnDataType = "nvarchar(100)")]
+    public string Business { get; set; } = string.Empty;
 
     /// <summary>
     ///     商品
     /// </summary>
+    [SugarColumn(ColumnDataType = "nvarchar(100)")]
     public string Commodity { get; set; } = string.Empty;
 
     /// <summary>
@@ -33,6 +26,7 @@ public class TallyBill
     /// <summary>
     ///     金额
     /// </summary>
+    [SugarColumn(ColumnDataType = "DECIMAL(18, 2)")]
     public decimal Amount { get; set; }
 
     /// <summary>
@@ -48,15 +42,28 @@ public class TallyBill
     /// <summary>
     ///     微信交易单号
     /// </summary>
+    [SugarColumn(ColumnDataType = "nvarchar(100)")]
     public string? WxTransactionTicketNumber { get; set; }
 
     /// <summary>
     ///     商户单号
     /// </summary>
+    [SugarColumn(ColumnDataType = "nvarchar(100)")]
     public string? CommercialTenantsNumber { get; set; }
 
     /// <summary>
     ///     备注信息
     /// </summary>
+    [SugarColumn(ColumnDataType = "nvarchar(100)")]
     public string? Remark { get; set; }
+
+    #region 导航属性
+
+    [Navigate(NavigateType.OneToOne, nameof(UserId))]
+    public User? NUser { get; set; }
+
+    [Navigate(NavigateType.OneToOne, nameof(TallyAccountId))]
+    public TallyAccount? NTallyAccount { get; set; }
+
+    #endregion
 }
