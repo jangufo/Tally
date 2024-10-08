@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tally.Api", "Tally.Api\Tally.Api.csproj", "{44905D8E-084F-4468-A27B-F3995AC7843E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tally.Models", "Tally.Models\Tally.Models.csproj", "{F415B565-20E8-4BE2-A1EF-30E5F1312641}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{44905D8E-084F-4468-A27B-F3995AC7843E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44905D8E-084F-4468-A27B-F3995AC7843E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44905D8E-084F-4468-A27B-F3995AC7843E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F415B565-20E8-4BE2-A1EF-30E5F1312641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F415B565-20E8-4BE2-A1EF-30E5F1312641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F415B565-20E8-4BE2-A1EF-30E5F1312641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F415B565-20E8-4BE2-A1EF-30E5F1312641}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
