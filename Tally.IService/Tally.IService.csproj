@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Tally.IRepository\Tally.IRepository.csproj" />
+        <ProjectReference Include="..\Tally.IRepository\Tally.IRepository.csproj"/>
     </ItemGroup>
 
 </Project>

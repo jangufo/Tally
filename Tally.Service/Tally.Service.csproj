@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Tally.IService\Tally.IService.csproj" />
+        <ProjectReference Include="..\Tally.IService\Tally.IService.csproj"/>
     </ItemGroup>
 
 </Project>

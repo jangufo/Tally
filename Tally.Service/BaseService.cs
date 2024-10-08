@@ -5,14 +5,14 @@ using Tally.IService;
 
 namespace Tally.Service;
 
-public class BaseService<TEntity> : IBaseService<TEntity>
+public class BaseService<TEntity>(IBaseRepository<TEntity> repository) : IBaseService<TEntity>
     where TEntity : class, new()
 {
-#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
     /// <summary>
-    /// 从子类的构造函数中传入
+    ///     让子类从构造函数中传入
     /// </summary>
-    protected IBaseRepository<TEntity> _repository;
+    private readonly IBaseRepository<TEntity> _repository = repository;
+
     public async Task<bool> CreatAsync(TEntity entity)
     {
         return await _repository.CreatAsync(entity);
