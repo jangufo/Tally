@@ -49,7 +49,7 @@ public class TallyBill : ModelBase
     ///     商户单号
     /// </summary>
     [SugarColumn(ColumnDataType = "nvarchar(100)")]
-    public string? CommercialTenantsNumber { get; set; }
+    public string? WxCommercialTenantsNumber { get; set; }
 
     /// <summary>
     ///     备注信息
