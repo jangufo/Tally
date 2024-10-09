@@ -4,7 +4,7 @@ namespace Tally.Models;
 
 public class TallyBill : ModelBase
 {
-    public int UserId { get; set; }
+    public int TallyUserId { get; set; }
 
     /// <summary>
     ///     收款商家
@@ -59,8 +59,8 @@ public class TallyBill : ModelBase
 
     #region 导航属性
 
-    [Navigate(NavigateType.OneToOne, nameof(UserId))]
-    public User? NUser { get; set; }
+    [Navigate(NavigateType.OneToOne, nameof(TallyUserId))]
+    public TallyUser? NUser { get; set; }
 
     [Navigate(NavigateType.OneToOne, nameof(TallyAccountId))]
     public TallyAccount? NTallyAccount { get; set; }

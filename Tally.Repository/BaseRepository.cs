@@ -9,7 +9,7 @@ namespace Tally.Repository;
 public class BaseRepository<TEntity> : SimpleClient<TEntity>, IBaseRepository<TEntity>
     where TEntity : class, new()
 {
-    public BaseRepository(ISqlSugarClient context = null!)
+    protected BaseRepository(ISqlSugarClient context = null!)
         : base(context)
     {
         base.Context = DbScoped.Sugar;

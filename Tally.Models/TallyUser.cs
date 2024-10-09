@@ -5,7 +5,7 @@ namespace Tally.Models;
 /// <summary>
 ///     用户表
 /// </summary>
-public class User : ModelBase
+public class TallyUser : ModelBase
 {
     [SugarColumn(ColumnDataType = "nvarchar(100)")]
     public string NickName { get; set; } = string.Empty;
