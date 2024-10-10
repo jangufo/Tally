@@ -1,5 +1,7 @@
 ﻿using System.Text.RegularExpressions;
+using Tally.Common;
 using Tally.IService.BillParse;
+using Tally.Models;
 
 namespace Tally.Service.BillParse;
 
@@ -13,36 +15,26 @@ public partial class WxBillParse : IWxBillParse
     /// </summary>
     /// <returns></returns>
     [GeneratedRegex(
-        @"^(?<DATE>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}),.*?,(?<BUSINESS>.*?),(?<COMMODITY>.*?),(?<E_BILL_TYPE>.*?),¥(?<AMOUNT>\d+\.\d{2}),(?<PAY_TYPE>.*?),(?<BILL_STATE>.*?),(?<WX_TRANSACTION_TICKET_NUMBER>\d+)\s+,(?<WX_COMMERCIAL_TENANTS_NUMBER>.*?)\s+,(?<REMARK>.*?)$")]
+        @"(?<DATE>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}),.*?,(?<BUSINESS>.*?),(?<COMMODITY>.*?),(?<E_BILL_TYPE>.*?),¥(?<AMOUNT>\d+\.\d{2}),(?<PAY_TYPE>.*?),(?<BILL_STATE>.*?),(?<WX_TRANSACTION_TICKET_NUMBER>\d+)\s+,(?<WX_COMMERCIAL_TENANTS_NUMBER>.*?)\s+,(?<REMARK>.*?)")]
     private static partial Regex RegexGenerated();
 
-    public int Parse(string billString)
+    public List<TallyBill> Parse(string billString)
     {
-        var matches = WxBillParseRegex.Matches(billString);
-        return matches.Count;
-
-        // foreach (var match in matches)
-        // {
-        //     string date = match.Groups["DATE"].Value;
-        //     string business = match.Groups["BUSINESS"].Value;
-        //     string commodity = match.Groups["COMMODITY"].Value;
-        //     string E_BILL_TYPE = match.Groups["E_BILL_TYPE"].Value;
-        //     string amount = match.Groups["AMOUNT"].Value;
-        //     string payType = match.Groups["PAY_TYPE"].Value;
-        //     string billState = match.Groups["BILL_STATE"].Value;
-        //     string WX_TRANSACTION_TICKET_NUMBER = match.Groups["WX_TRANSACTION_TICKET_NUMBER"].Value;
-        //     string WX_COMMERCIAL_TENANTS_NUMBER = match.Groups["WX_COMMERCIAL_TENANTS_NUMBER"].Value;
-        //     Console.WriteLine("____________________________________________");
-        //     Console.WriteLine("DATE: {0}", date);
-        //     Console.WriteLine("BUSINESS: {0}", business);
-        //     Console.WriteLine("COMMODITY: {0}", commodity);
-        //     Console.WriteLine("E_BILL_TYPE: {0}", E_BILL_TYPE);
-        //     Console.WriteLine("AMOUNT: {0}", amount);
-        //     Console.WriteLine("PAY_TYPE: {0}", payType);
-        //     Console.WriteLine("BILL_STATE: {0}", billState);
-        //     Console.WriteLine("WX_TRANSACTION_TICKET_NUMBER: {0}", WX_TRANSACTION_TICKET_NUMBER);
-        //     Console.WriteLine("WX_COMMERCIAL_TENANTS_NUMBER: {0}", WX_COMMERCIAL_TENANTS_NUMBER);
-        //     Console.WriteLine();
-        // }
+        return WxBillParseRegex
+            .Matches(billString)
+            .Select(m => new TallyBill
+            {
+                CreatDateTime = DateTime.Parse(m.Groups["DATE"].Value),
+                LastModifiedDateTime = DateTime.Now,
+                Business = m.Groups["BUSINESS"].Value.Trim(),
+                Commodity = m.Groups["COMMODITY"].Value.Trim(),
+                EBillType = Converter.StringToE_BillType(m.Groups["E_BILL_TYPE"].Value.Trim()),
+                Amount = decimal.Parse(m.Groups["AMOUNT"].Value),
+                WxPayType = m.Groups["WX_PAY_TYPE"].Value.Trim(),
+                BillState = Converter.StringToE_BillState(m.Groups["BILL_STATE"].Value.Trim()),
+                WxCommercialTenantsNumber = m.Groups["WX_COMMERCIAL_TENANTS_NUMBER"].Value,
+                WxTransactionTicketNumber = m.Groups["WX_TRANSACTION_TICKET_NUMBER"].Value,
+                Remark = m.Groups["REMARK"].Value.Trim(),
+            }).ToList();
     }
 }

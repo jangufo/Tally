@@ -35,6 +35,12 @@ public class TallyBill : ModelBase
     public int TallyAccountId { get; set; }
 
     /// <summary>
+    ///     支付方式
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public string? WxPayType { get; set; }
+
+    /// <summary>
     ///     账单状态
     /// </summary>
     public E_BillState BillState { get; set; }

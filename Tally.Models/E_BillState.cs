@@ -18,7 +18,7 @@ public enum E_BillState
     RefundSuccessful = 2,
 
     /// <summary>
-    ///     有错误
+    ///     其他
     /// </summary>
-    Error = 5
+    Nothing = 3
 }

@@ -21,7 +21,7 @@ public class Program
         builder.Configuration
             .AddJsonFile("appsettings.json", true, false)
             .AddJsonFile("appsettings.private.json", true, false);
-        var connectionString = builder.Configuration.GetConnectionString("SqlServer");
+        string? connectionString = builder.Configuration.GetConnectionString("SqlServer");
 
         SugarIocServices.AddSqlSugar(
             new IocConfig
